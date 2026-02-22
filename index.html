@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zivara - Timeless Beauty</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'luxury-gold': '#B88746',
+                        'luxury-bg': '#E8C6B0', 
+                        'glass-border': 'rgba(255, 255, 255, 0.4)',
+                        'text-dark': '#4A2C2A'
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    backgroundImage: {
+                        'luxury-gradient': 'linear-gradient(135deg, #FDFBF7 0%, #F2DBC9 40%, #E0B496 100%)',
+                        'card-gradient': 'linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%)',
+                         'btn-gradient': 'linear-gradient(90deg, #D4AF37 0%, #F2D06B 50%, #D4AF37 100%)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* --- GLOBAL & UTILITY --- */
+        body {
+            /* REPLACED: Removed linear-gradient, added background image */
+            background-image: url('./images/site-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* This makes the silk stay still while you scroll */
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #4A2C2A;
+        }
+
+        /* Glassmorphism Logic - Exact Replica */
+        .glass-panel {
+            /* 1. Liquid Base: Ultra-clear transparency with a top-down sheen */
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.02) 100%);
+            
+            /* 2. Heavy Premium Blur: Maximized to look like thick crystal */
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            
+            /* 3. The Copper/Rose-Gold Border Frame */
+            border: 1px solid rgba(184, 135, 70, 0.6); 
+            
+            /* 4. The "Liquid Depth" Engine (The most important part) */
+            box-shadow: 
+                /* Layer A: Sharp White Highlight on top edge (Simulates light hitting glass) */
+                inset 0 1px 0 rgba(255, 255, 255, 0.7),
+                
+                /* Layer B: Deep Rose-Gold Inner Glow (Simulates thickness/liquid inside) */
+                inset 0 0 30px rgba(184, 135, 70, 0.15),
+                
+                /* Layer C: Soft bottom shadow to lift card off background */
+                0 20px 40px -10px rgba(0, 0, 0, 0.15),
+                
+                /* Layer D: Faint copper outer glow for elegance */
+                0 0 15px rgba(184, 135, 70, 0.2);
+            
+            border-radius: 1.5rem;
+            position: relative;
+        }
+
+
+
+        /* Nav Glass - specifically styled like image */
+        .nav-glass {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 9999px; /* Full pill shape */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        /* Gold Text Gradient Effect */
+        .text-gold-gradient {
+            background: linear-gradient(to right, #B88746, #D4AF37, #B88746);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+         /* Liquid Button Effect */
+        .liquid-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(4px);
+            box-shadow: 
+                inset 0 0 10px rgba(255, 255, 255, 0.3),
+                0 4px 15px rgba(184, 135, 70, 0.2);
+            transition: all 0.4s ease;
+        }
+        .liquid-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                inset 0 0 20px rgba(255, 255, 255, 0.5),
+                0 8px 25px rgba(184, 135, 70, 0.4);
+            border-color: #fff;
+        }
+
+        /* Card Hover */
+        .service-card:hover {
+            transform: translateY(-5px);
+            /* On hover, we intensify the copper glow */
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 0.9),
+                inset 0 0 40px rgba(184, 135, 70, 0.25),
+                0 25px 50px -10px rgba(0, 0, 0, 0.2),
+                0 0 25px rgba(184, 135, 70, 0.5); /* Stronger glow */
+            border-color: rgba(184, 135, 70, 1);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #E6C8B5; }
+        ::-webkit-scrollbar-thumb { background: #B88746; border-radius: 3px; }
+    
+    
+    /* --- OPTION C: CRYSTAL CLEAR PINK LIQUID GLASS (Final Polish) --- */
+    .service-card {
+            /* 1. New Taller Height for Grandeur */
+            min-height: 200px; /* Increased from ~150px to 260px */
+            display: flex; /* Helps center text vertically */
+            flex-direction: column;
+            justify-content: center; /* Pushes content to the center */
+            
+            /* 2. The Tint: Warm Rose-Peach Transparency */
+            background: linear-gradient(180deg, rgba(255, 235, 225, 0.35) 0%, rgba(255, 220, 210, 0.15) 100%) !important;
+            
+            /* 3. Clarity */
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+
+            /* 4. The "Thick Edge" Structure */
+            border: 1px solid rgba(255, 255, 255, 0.6) !important; 
+            border-bottom: 1px solid rgba(184, 135, 70, 0.5) !important; 
+
+            /* 5. The Liquid Lighting Engine */
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 0.9),
+                inset 0 0 30px rgba(184, 135, 70, 0.1),
+                0 0 25px 5px rgba(184, 135, 70, 0.35),
+                0 15px 35px rgba(0,0,0,0.1) !important;
+            
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* 5. Text Styling: Dark Brown for high contrast against the light pink glass */
+        .service-card h4 { 
+            color: #4A2C2A !important; 
+            font-weight: 700;
+            margin-top: 10px; /* Adds space between image and text */
+        }
+        .service-card p { 
+            color: #5D3A38 !important; 
+            font-weight: 500;
+        }
+
+        /* Hover Effect */
+        .service-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            background: linear-gradient(180deg, rgba(255, 245, 235, 0.45) 0%, rgba(255, 230, 220, 0.25) 100%) !important;
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 1),
+                0 0 50px 10px rgba(184, 135, 70, 0.6) !important;
+            border-color: #ffffff !important;
+        }
+    
+        /* --- PREMIUM BLACK TEXT BORDER --- */
+        /* --- PREMIUM BLACK TEXT BORDER & SPACING --- */
+        .text-border-black {
+            /* 1. The Black Border around the letters */
+            -webkit-text-stroke: 1.5px #000000; 
+            
+            /* 2. The Gold Color Inside */
+            color: #B88746 !important; 
+            
+            /* 3. Premium Spacing (The breathing room you asked for) */
+            letter-spacing: 3px; /* Adds space between every letter */
+            
+            /* 4. Shadow & Weight */
+            text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1);
+            font-weight: 700;
+        }
+    
+        /* --- PREMIUM TESTIMONIAL CARD --- */
+        .testimonial-card {
+            /* Layout: Ensures equal height and centered content */
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 3rem 2rem; /* Spacious padding for a premium feel */
+            
+            /* --- EXACT PREMIUM CRYSTAL STYLE FROM SERVICES --- */
+            /* 1. The Tint: Warm Rose-Peach Transparency */
+            background: linear-gradient(180deg, rgba(255, 235, 225, 0.35) 0%, rgba(255, 220, 210, 0.15) 100%) !important;
+            /* 2. Clarity */
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            /* 3. The Thick Edge Structure */
+            border: 1px solid rgba(255, 255, 255, 0.6) !important; 
+            border-bottom: 1px solid rgba(184, 135, 70, 0.5) !important; 
+            border-radius: 2rem; /* Slightly rounder corners for testimonials */
+            /* 4. The Liquid Lighting & Permanent Glow */
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 0.9),
+                inset 0 0 30px rgba(184, 135, 70, 0.1),
+                0 0 25px 5px rgba(184, 135, 70, 0.35),
+                0 15px 35px rgba(0,0,0,0.1) !important;
+            
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* Exact Hover Effect from Services */
+        .testimonial-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            background: linear-gradient(180deg, rgba(255, 245, 235, 0.45) 0%, rgba(255, 230, 220, 0.25) 100%) !important;
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 1),
+                0 0 50px 10px rgba(184, 135, 70, 0.6) !important; /* Intense Gold Glow */
+            border-color: #ffffff !important;
+        }
+
+
+        /* --- ULTRA PREMIUM CONTACT CARD & ANIMATION --- */
+        
+        /* 1. The Animation: Creates a slow, shifting liquid light effect */
+        @keyframes liquidShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .contact-glass-card {
+            /* Layout & Spacing */
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3rem; /* Big padding for luxury feel */
+            
+            /* 2. THE LIQUID GLASS BASE */
+            /* We use a gradient that is 200% wide so we can move it (animate it) */
+            background: linear-gradient(120deg, rgba(255, 235, 225, 0.35), rgba(255, 220, 210, 0.15), rgba(255, 245, 235, 0.4));
+            background-size: 200% 200%;
+            animation: liquidShift 8s ease infinite; /* The "Basic & Small" Animation inside */
+
+            /* 3. Clarity */
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            /* 4. The Thick Premium Border */
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-bottom: 2px solid rgba(184, 135, 70, 0.6); /* Thicker Gold Bottom */
+            border-radius: 2rem;
+
+            /* 5. Depth & Glow */
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 0.9), /* Top Wet Lip */
+                inset 0 0 40px rgba(184, 135, 70, 0.1), /* Inner Volume */
+                0 15px 40px -10px rgba(0, 0, 0, 0.15), /* Drop Shadow */
+                0 0 20px rgba(184, 135, 70, 0.2); /* Soft Outer Aura */
+            
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* 6. ULTRA RICH HOVER EFFECT */
+        .contact-glass-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            background: linear-gradient(120deg, rgba(255, 245, 235, 0.5), rgba(255, 230, 220, 0.3), rgba(255, 255, 255, 0.5));
+            border-color: #ffffff;
+            box-shadow: 
+                inset 0 1px 0 rgba(255, 255, 255, 1),
+                0 25px 60px -10px rgba(0, 0, 0, 0.2), 
+                0 0 70px 10px rgba(184, 135, 70, 0.7); /* Intense "Ultra Rich" Gold Glow */
+        }
+
+        body {
+   background-attachment: fixed;
+}
+
+        /* --- ULTRA PREMIUM RUBY GLASS BUTTON (V2 - 90% Match) --- */
+        /* ===== CALL TO ACTION BUTTON ===== */
+        /* ===== ULTRA PREMIUM RED GLASS BUTTON ===== */
+.cta-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 3.8rem;
+  border-radius: 9999px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  border: none;
+  overflow: hidden;
+
+  /* DEEP RED GLASS CORE */
+  background: linear-gradient(
+  180deg,
+  rgba(255,255,255,0.9) 0%,
+  rgba(255,255,255,0.25) 12%,
+  rgba(255,50,50,0.85) 35%,
+  rgba(200,0,0,1) 65%,
+  rgba(120,0,0,1) 88%,
+  rgba(60,0,0,1) 100%
+);
+
+
+
+  /* DEPTH + LUXURY GLOW */
+  box-shadow:
+    inset 0 6px 10px rgba(255,255,255,0.9),
+    inset 0 -10px 18px rgba(80,0,0,0.5),
+    0 15px 35px rgba(150,0,0,0.45);
+
+  transition: all .25s ease;
+}
+
+
+/* WHITE PREMIUM SHINE */
+.cta-btn::before {
+  content: "";
+  position: absolute;
+  left: -10%;
+  top: -35%;
+  width: 120%;
+  height: 140%;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.95),
+    rgba(255,255,255,0.05)
+  );
+  transform: rotate(-8deg);
+  filter: blur(7px);
+  pointer-events: none;
+}
+
+
+/* HOVER (SOFT LIFT) */
+.cta-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow:
+    inset 0 8px 14px rgba(255,255,255,1),
+    inset 0 -10px 20px rgba(80,0,0,0.55),
+    0 25px 50px rgba(180,0,0,0.55);
+}
+
+
+/* CLICK PRESS */
+.cta-btn:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: inset 0 4px 8px rgba(0,0,0,0.35);
+}
+
+
+
+    </style>
+</head>
+<body class="antialiased selection:bg-[#B88746] selection:text-white">
+
+    <section id="home" class="relative w-full min-h-screen flex flex-col pt-6 overflow-hidden">
+        
+        <div class="container mx-auto px-4 md:px-8 flex justify-between items-center z-50 relative py-4">
+            <div class="text-3xl md:text-4xl font-serif tracking-widest text-[#4A2C2A] font-bold">
+                Zivara
+            </div>
+
+            <nav class="hidden lg:flex nav-glass px-8 py-3 space-x-8 items-center">
+                <a href="#home" class="text-xs tracking-widest font-medium text-slate-800 hover:text-[#B88746] transition uppercase">Home</a>
+                <a href="#awards" class="text-xs tracking-widest font-medium text-slate-800 hover:text-[#B88746] transition uppercase">Awards</a>
+                <a href="#services" class="text-xs tracking-widest font-medium text-slate-800 hover:text-[#B88746] transition uppercase">Services</a>
+                <a href="#gallery" class="text-xs tracking-widest font-medium text-slate-800 hover:text-[#B88746] transition uppercase">Gallery</a>
+                <a href="#contact" class="px-5 py-2 rounded-full bg-white/40 border border-white/60 text-xs tracking-widest font-bold text-slate-900 hover:bg-white/60 transition uppercase shadow-sm">Contact Us</a>
+            </nav>
+
+            <div class="w-10 h-10 rounded-full nav-glass flex items-center justify-center cursor-pointer hover:bg-white/40 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-slate-700">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                </svg>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-4 flex-1 flex flex-col lg:flex-row items-center justify-between relative z-10 mt-10 lg:mt-0">
+            
+            <div class="lg:w-1/2 text-center lg:text-left pt-10 lg:pt-0 pl-0 lg:pl-10">
+                <h1 class="font-serif text-6xl lg:text-[7rem] leading-none text-transparent bg-clip-text bg-gradient-to-r from-[#B86E46] to-[#8C5E3C] drop-shadow-sm mb-4">
+                    Zivara
+                </h1>
+                <p class="text-xl lg:text-3xl font-serif text-[#5D3A38] mb-8 leading-relaxed">
+                    Curating Timeless Beauty.<br>
+                    Elevate Your Essence.
+                </p>
+                <a href="#contact" class="inline-block px-10 py-4 rounded-full liquid-btn text-[#5D3A38] font-bold tracking-widest uppercase text-sm">
+                    Book Now
+                </a>
+            </div>
+
+            <div class="lg:w-1/2 h-full flex items-end justify-center lg:justify-end relative mt-10 lg:mt-0">
+                <div class="absolute top-10 right-10 w-96 h-96 bg-white/30 rounded-full blur-3xl"></div>
+                
+                <img src="./images/hero-lady.jpg" alt="Elegant Indian Bride" class="relative z-10 w-auto h-[60vh] lg:h-[80vh] object-contain drop-shadow-2xl">
+            </div>
+        </div>
+        
+        <div class="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+            <div class="absolute top-[-20%] left-[-10%] w-[120%] h-[120%] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent opacity-60"></div>
+        </div>
+    </section>
+
+    <section id="awards" class="py-24 px-4 relative">
+        <div class="container mx-auto">
+            
+            <div class="flex flex-col lg:flex-row gap-12 items-stretch justify-center">
+                
+                <div class="glass-panel p-10 lg:p-14 rounded-[2rem] flex-1 max-w-2xl relative overflow-hidden group">
+                    <div class="absolute top-0 left-[-100%] w-1/2 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 group-hover:left-[200%] transition-all duration-1000 ease-in-out"></div>
+
+                   <h3 class="text-lg uppercase tracking-[0.2em] text-[#B88746] mb-4 font-medium">2024 Winner</h3>
+                   <h2 class="font-serif text-4xl lg:text-5xl text-[#4A2C2A] mb-8 leading-tight">Best Luxury Salon</h2>
+                   
+                   <div class="space-y-6 text-[#5D3A38] text-lg font-light leading-relaxed">
+                       <p>Honored by the Global Beauty & Wellness Awards for unparalleled service, artistry, and commitment to excellence.</p>
+                       <p>Recognized among the finest in the world, setting the gold standard for female beauty parlours.</p>
+                       <p class="font-medium">A testament to our dedication to curating timeless beauty and elevating your essence.</p>
+                   </div>
+               </div>
+
+                <div class="glass-panel p-3 rounded-[2rem] w-full lg:w-[400px] h-[500px] flex-shrink-0 relative">
+                    <div class="w-full h-full rounded-[1.5rem] overflow-hidden border border-[#B88746]/30 relative">
+                        <img src="./images/award.jpg" alt="Award Plaque" class="w-full h-full object-cover opacity-90 hover:opacity-100 transition duration-500">
+                         <div class="absolute inset-2 border border-white/40 rounded-[1.2rem] pointer-events-none"></div>
+                    </div>
+                 </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-20 px-4">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-5xl lg:text-6xl text-[#B86E46] mb-2 uppercase drop-shadow-sm opacity-90 text-border-black">Our Signature Services</h2>
+                <div class="h-1 w-24 bg-gradient-to-r from-transparent via-[#B88746] to-transparent mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 lg:px-12">
+                
+                <div class="glass-panel p-3 rounded-2xl flex flex-col items-center gap-4 text-center service-card cursor-pointer group">
+                    <div class="w-[180px] h-[135px] rounded-2xl overflow-hidden flex-shrink-0 shadow-lg border border-white/30 mt-2">
+                        <img src="./images/bridal-makeup.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Bridal">
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-xl text-[#4A2C2A] font-bold uppercase mb-1">Bridal Makeup</h4>
+                        <p class="text-sm text-[#5D3A38] leading-tight">Flawless bridal look for your special day.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-3 rounded-2xl flex flex-col items-center gap-4 text-center service-card cursor-pointer group">
+                    <div class="w-[180px] h-[135px] rounded-2xl overflow-hidden flex-shrink-0 shadow-lg border border-white/30 mt-2">
+                        <img src="./images/pre-bridal.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Pre-Bridal">
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-xl text-[#4A2C2A] font-bold uppercase mb-1">Pre-Bridal</h4>
+                        <p class="text-sm text-[#5D3A38] leading-tight">Radiant glow leading up to your wedding.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-3 rounded-2xl flex flex-col items-center gap-4 text-center service-card cursor-pointer group">
+                    <div class="w-[180px] h-[135px] rounded-2xl overflow-hidden flex-shrink-0 shadow-lg border border-white/30 mt-2">
+                        <img src="./images/party-makeup.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Party Makeup">
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-xl text-[#4A2C2A] font-bold uppercase mb-1">Party Makeup</h4>
+                        <p class="text-sm text-[#5D3A38] leading-tight">Stunning look for any celebration.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-3 rounded-2xl flex flex-col items-center gap-4 text-center service-card cursor-pointer group">
+                    <div class="w-[180px] h-[135px] rounded-2xl overflow-hidden flex-shrink-0 shadow-lg border border-white/30 mt-2">
+                        <img src="./images/hair-spa.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Hair Spa">
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-xl text-[#4A2C2A] font-bold uppercase mb-1">Hair Spa</h4>
+                        <p class="text-sm text-[#5D3A38] leading-tight">Revitalizing treatment for healthy, shiny hair.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-3 rounded-2xl flex flex-col items-center gap-4 text-center service-card cursor-pointer group">
+                    <div class="w-[180px] h-[135px] rounded-2xl overflow-hidden flex-shrink-0 shadow-lg border border-white/30 mt-2">
+                        <img src="./images/hair-color.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Hair Color">
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-xl text-[#4A2C2A] font-bold uppercase mb-1">Hair Color</h4>
+                        <p class="text-sm text-[#5D3A38] leading-tight">Expert coloring to enhance your style.</p>
+                    </div>
+                </div>
+
+                 <div class="glass-panel p-3 rounded-2xl flex flex-col items-center gap-4 text-center service-card cursor-pointer group">
+                    <div class="w-[180px] h-[135px] rounded-2xl overflow-hidden flex-shrink-0 shadow-lg border border-white/30 mt-2">
+                        <img src="./images/facial.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Facial">
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-xl text-[#4A2C2A] font-bold uppercase mb-1">Facial</h4>
+                        <p class="text-sm text-[#5D3A38] leading-tight">Deep cleansing for a youthful complexion.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-3 rounded-2xl flex flex-col items-center gap-4 text-center service-card cursor-pointer group">
+                    <div class="w-[180px] h-[135px] rounded-2xl overflow-hidden flex-shrink-0 shadow-lg border border-white/30 mt-2">
+                        <img src="./images/manicure.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Manicure">
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-xl text-[#4A2C2A] font-bold uppercase mb-1">Manicure</h4>
+                        <p class="text-sm text-[#5D3A38] leading-tight">Pampering care for your hands and nails.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-3 rounded-2xl flex flex-col items-center gap-4 text-center service-card cursor-pointer group">
+                    <div class="w-[180px] h-[135px] rounded-2xl overflow-hidden flex-shrink-0 shadow-lg border border-white/30 mt-2">
+                        <img src="./images/waxing.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Waxing">
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-xl text-[#4A2C2A] font-bold uppercase mb-1">Waxing</h4>
+                        <p class="text-sm text-[#5D3A38] leading-tight">Smooth, silky skin with gentle techniques.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-3 rounded-2xl flex flex-col items-center gap-4 text-center service-card cursor-pointer group">
+                    <div class="w-[180px] h-[135px] rounded-2xl overflow-hidden flex-shrink-0 shadow-lg border border-white/30 mt-2">
+                        <img src="./images/nail-art.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" alt="Nail Art">
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-xl text-[#4A2C2A] font-bold uppercase mb-1">Nail Art</h4>
+                        <p class="text-sm text-[#5D3A38] leading-tight">Creative designs to express your style.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="font-serif text-5xl text-center text-[#B86E46] mb-16 uppercase font-medium text-border-black">Gallery</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
+                
+                <div class="glass-panel p-2 rounded-xl group hover:scale-[1.02] transition duration-500">
+                    <div class="h-56 overflow-hidden rounded-lg mb-4">
+                        <img src="images/gallery1.jpg" alt="Bridal Getting Ready" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="px-2 pb-2">
+                        <h3 class="font-serif text-xl text-[#4A2C2A] mb-1">Bridal Getting Ready</h3>
+                        <p class="text-xs text-[#5D3A38]">The journey to perfection.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-2 rounded-xl group hover:scale-[1.02] transition duration-500">
+                    <div class="h-56 overflow-hidden rounded-lg mb-4">
+                        <img src="./images/gallery2.jpg" alt="Timeless Bridal Radiance" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="px-2 pb-2">
+                        <h3 class="font-serif text-xl text-[#4A2C2A] mb-1">Timeless Bridal Radiance</h3>
+                        <p class="text-xs text-[#5D3A38]">Elegance personified.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-2 rounded-xl group hover:scale-[1.02] transition duration-500">
+                    <div class="h-56 overflow-hidden rounded-lg mb-4">
+                        <img src="./images/gallery3.jpg" alt="Artistic Nail Couture" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="px-2 pb-2">
+                        <h3 class="font-serif text-xl text-[#4A2C2A] mb-1">Artistic Nail Couture</h3>
+                        <p class="text-xs text-[#5D3A38]">Detailed perfection.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-2 rounded-xl group hover:scale-[1.02] transition duration-500">
+                    <div class="h-56 overflow-hidden rounded-lg mb-4">
+                        <img src="./images/gallery4.jpg" alt="Vibrant Hair Color" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="px-2 pb-2">
+                        <h3 class="font-serif text-xl text-[#4A2C2A] mb-1">Vibrant Hair Color</h3>
+                        <p class="text-xs text-[#5D3A38]">Express your style.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-2 rounded-xl group hover:scale-[1.02] transition duration-500">
+                    <div class="h-56 overflow-hidden rounded-lg mb-4">
+                        <img src="./images/gallery5.jpg" alt="Rejuvenating Facial" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="px-2 pb-2">
+                        <h3 class="font-serif text-xl text-[#4A2C2A] mb-1">Rejuvenating Facial</h3>
+                        <p class="text-xs text-[#5D3A38]">Glow from within.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-2 rounded-xl group hover:scale-[1.02] transition duration-500">
+                    <div class="h-56 overflow-hidden rounded-lg mb-4">
+                        <img src="./images/gallery6.jpg" alt="Glamorous Party Look" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                    </div>
+                    <div class="px-2 pb-2">
+                        <h3 class="font-serif text-xl text-[#4A2C2A] mb-1">Glamorous Party Look</h3>
+                        <p class="text-xs text-[#5D3A38]">Stunning for every event.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="font-serif text-5xl text-center text-[#B86E46] mb-16 uppercase font-medium text-border-black">Clients Stories</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 items-stretch">
+                
+                <div class="h-full">
+                    <div class="testimonial-card group cursor-pointer">
+                        <div class="w-28 h-28 rounded-full overflow-hidden border-[3px] border-[#B88746] shadow-lg mb-6 flex-shrink-0 relative z-10">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=300&auto=format&fit=crop" alt="Priya Sharma" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        </div>
+                        
+                        <h4 class="font-serif text-2xl font-bold text-[#4A2C2A] mb-4 relative z-10">Priya Sharma</h4>
+                        
+                        <p class="font-sans text-lg text-[#5D3A38] leading-relaxed relative z-10 font-medium">
+                            “Absolutely stunning bridal makeup! The team made me look and feel like a real-life princess on my special day. The attention to detail was incredible.”
+                        </p>
+                    </div>
+                </div>
+
+                <div class="h-full">
+                    <div class="testimonial-card group cursor-pointer">
+                         <div class="w-28 h-28 rounded-full overflow-hidden border-[3px] border-[#B88746] shadow-lg mb-6 flex-shrink-0 relative z-10">
+                            <img src="images/client2.jpg" alt="Ananya Desai" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        </div>
+                        
+                        <h4 class="font-serif text-2xl font-bold text-[#4A2C2A] mb-4 relative z-10">Ananya Desai</h4>
+                        
+                        <p class="font-sans text-lg text-[#5D3A38] leading-relaxed relative z-10 font-medium">
+                            “My hair color transformation was exceptional. They understood exactly what I wanted. The results were flawless and incredibly rejuvenating.”
+                        </p>
+                    </div>
+                </div>
+
+                <div class="h-full">
+                    <div class="testimonial-card group cursor-pointer">
+                         <div class="w-28 h-28 rounded-full overflow-hidden border-[3px] border-[#B88746] shadow-lg mb-6 flex-shrink-0 relative z-10">
+                            <img src="images/client3.jpg" alt="Riya Gupta" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        </div>
+                        
+                        <h4 class="font-serif text-2xl font-bold text-[#4A2C2A] mb-4 relative z-10">Riya Gupta</h4>
+                        
+                        <p class="font-sans text-lg text-[#5D3A38] leading-relaxed relative z-10 font-medium">
+                            “The party makeup was perfect! It lasted all night and I received so many compliments. A truly luxurious and professional experience.”
+                        </p>
+                    </div>
+                </div>
+
+            </div> 
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 px-4 relative">
+        <div class="container mx-auto max-w-5xl">
+            <h2 class="font-serif text-5xl lg:text-6xl text-center text-[#B86E46] mb-16 uppercase font-medium text-border-black">Contact Us</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                
+                <div class="contact-glass-card group cursor-default">
+                    
+                    <div class="mb-8">
+                        <span class="block font-serif text-2xl font-bold text-[#4A2C2A] mb-2 tracking-wide group-hover:text-[#B88746] transition duration-300">Address</span>
+                        <p class="text-[#5D3A38] text-lg leading-relaxed font-medium">Near Gurudwara Chowk, Beadonpura,<br>Karol Bagh, New Delhi</p>
+                    </div>
+
+                    <div class="mb-8">
+                        <span class="block font-serif text-2xl font-bold text-[#4A2C2A] mb-2 tracking-wide group-hover:text-[#B88746] transition duration-300">Timing</span>
+                        <p class="text-[#5D3A38] text-lg font-medium">Mon to Sun<br>10:00 am to 10:00 pm</p>
+                    </div>
+
+                    <div>
+                        <span class="block font-serif text-2xl font-bold text-[#4A2C2A] mb-2 tracking-wide group-hover:text-[#B88746] transition duration-300">Contact Num</span>
+                        <div class="space-y-1">
+                            <p class="text-[#5D3A38] text-xl font-bold tracking-wider">+91 73583 91115</p>
+                            <p class="text-[#5D3A38] text-xl font-bold tracking-wider">+91 98765 43210</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="glass-panel p-3 rounded-2xl h-80 border-2 border-[#B88746]/30 shadow-2xl">
+                    <div class="w-full h-full rounded-xl overflow-hidden relative">
+                         <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.760233481239!2d77.18955!3d28.6517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d029c5f402c8b%3A0x464019e73f8a002!2sKarol%20Bagh%2C%20New%20Delhi%2C%20Delhi!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="flex justify-center mt-12 pb-10">
+                <a href="tel:+917358391115" class="relative">
+                    <button class="cta-btn">Call To Action
+
+                    </button>
+
+
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="relative pt-20 pb-10 overflow-hidden">
+        <div class="absolute inset-0 bg-[#D9A678] mix-blend-multiply opacity-30 z-0"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#B88746]/40 to-transparent z-0"></div>
+
+        <div class="absolute top-0 left-4 right-4 h-px bg-[#B88746]/50"></div>
+        <div class="absolute bottom-4 left-4 right-4 h-px bg-[#B88746]/30"></div>
+        <div class="absolute top-4 bottom-4 left-4 w-px bg-[#B88746]/30"></div>
+        <div class="absolute top-4 bottom-4 right-4 w-px bg-[#B88746]/30"></div>
+
+        <div class="container mx-auto relative z-10 text-center px-8">
+            
+            <h1 class="font-serif text-6xl md:text-8xl text-transparent bg-clip-text bg-gradient-to-b from-[#FFFFFF] to-[#D8C3A5] drop-shadow-sm mb-4 tracking-tight">
+                Zivara
+            </h1>
+            
+            <p class="font-serif text-[#5D3A38] text-lg md:text-xl mb-12">
+                Curating Timeless Beauty. Elevate Your Essence.
+            </p>
+
+            <div class="flex justify-center gap-6 mb-12">
+                <a href="#" class="w-16 h-16 rounded-full bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-500 p-[2px] shadow-lg hover:scale-110 transition duration-300">
+                    <div class="w-full h-full bg-white rounded-full flex items-center justify-center">
+                        <svg class="w-8 h-8 text-[#d62976]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </div>
+                </a>
+                
+                <a href="#" class="w-16 h-16 rounded-full bg-[#1877F2] flex items-center justify-center shadow-lg hover:scale-110 transition duration-300">
+                    <svg class="w-9 h-9 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.791-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+            </div>
+
+            <div class="mb-12">
+                 <a href="#home" class="inline-block px-12 py-3 border border-2 border-black rounded-full text-white bg-gradient-to-r from-[#C20000] to-[#6B0000] font-sans tracking-widest text-lg shadow-lg hover:shadow-[#8B0000]/40 transition">
+                    HOME
+                </a>
+            </div>
+
+            <p class="text-[#5D3A38]/70 text-sm">
+                © 2026 Zivara. All rights reserved.
+            </p>
+
+            <div class="absolute bottom-6 right-8 text-white/80 text-4xl"></div>
+
+        </div>
+    </footer>
+
+</body>
+</html>
