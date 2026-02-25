@@ -374,32 +374,103 @@
 }
 
 
+    /* --- ULTRA PREMIUM FLOATING GLASS NAV --- */
+    /* --- ULTRA PREMIUM SWIPEABLE NAVBAR --- */
+    .glass-nav-wrapper {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            
+            /* Sizing */
+            width: 92%; /* Takes up most of the mobile screen */
+            max-width: 600px; /* Looks neat on Desktop */
+            
+            /* The Glass Effect */
+            background: rgba(255, 255, 255, 0.25); /* Slightly clearer for readability */
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            
+            /* THE SWIPE LOGIC */
+            display: flex;
+            align-items: center;
+            overflow-x: auto; /* Enables swiping left/right */
+            padding: 6px;
+            gap: 5px; /* Space between buttons */
+            
+            /* Hide Scrollbar (Clean Look) */
+            -ms-overflow-style: none;  /* IE */
+            scrollbar-width: none;  /* Firefox */
+        }
+        
+        /* Hide scrollbar for Chrome/Safari */
+        .glass-nav-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
+        .glass-nav-link {
+            /* Text Styling */
+            white-space: nowrap; /* Prevents text breaking into two lines */
+            color: #4A2C2A;
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px; /* Perfect size for mobile */
+            font-weight: 600;
+            text-transform: uppercase;
+            text-decoration: none;
+            
+            /* Button Shape */
+            padding: 10px 18px; /* Easy to tap */
+            border-radius: 30px;
+            transition: all 0.4s ease;
+            flex-shrink: 0; /* Ensures buttons don't get squashed */
+        }
+
+        /* Active State (Gold Pill) */
+        .glass-nav-link.active {
+            background: #ffffff;
+            color: #B88746; /* Gold Text */
+            box-shadow: 0 4px 15px rgba(184, 135, 70, 0.25); /* Gold Glow */
+            font-weight: 700;
+        }
+
+        /* --- HERO SPACING FIX (Mobile Priority) --- */
+        /* This pushes the Salon Name down so the Nav doesn't cover it */
+        .hero-spacer {
+            padding-top: 120px !important;
+        }
+        
+        /* On Desktop, we need slightly less padding */
+        @media (min-width: 768px) {
+            .hero-spacer {
+                padding-top: 0 !important;
+            }
+        }
+
 
     </style>
 </head>
 <body class="antialiased selection:bg-[#B88746] selection:text-white">
 
-    <section id="home" class="relative w-full min-h-screen flex flex-col pt-6 overflow-hidden">
+    <section id="home" class="relative w-full min-h-screen flex flex-col items-center justify-center hero-spacer overflow-hidden">
         
         <div class="container mx-auto px-4 md:px-8 flex justify-between items-center z-50 relative py-4">
-            <div class="text-3xl md:text-4xl font-serif tracking-widest text-[#4A2C2A] font-bold">
-                Zivara
-            </div>
+            
 
-            <nav class="hidden lg:flex nav-glass px-8 py-3 space-x-8 items-center">
-                <a href="#home" class="text-xs tracking-widest font-medium text-slate-800 hover:text-[#B88746] transition uppercase">Home</a>
-                <a href="#awards" class="text-xs tracking-widest font-medium text-slate-800 hover:text-[#B88746] transition uppercase">Awards</a>
-                <a href="#services" class="text-xs tracking-widest font-medium text-slate-800 hover:text-[#B88746] transition uppercase">Services</a>
-                <a href="#gallery" class="text-xs tracking-widest font-medium text-slate-800 hover:text-[#B88746] transition uppercase">Gallery</a>
-                <a href="#contact" class="px-5 py-2 rounded-full bg-white/40 border border-white/60 text-xs tracking-widest font-bold text-slate-900 hover:bg-white/60 transition uppercase shadow-sm">Contact Us</a>
+            <nav class="glass-nav-wrapper">
+                <a href="#home" class="glass-nav-link nav-item active">Home</a>
+                <a href="#awards" class="glass-nav-link nav-item">Awards</a>
+                <a href="#services" class="glass-nav-link nav-item">Services</a>
+                <a href="#gallery" class="glass-nav-link nav-item">Gallery</a>
+                <a href="#contact" class="glass-nav-link nav-item">Contact Us</a>
             </nav>
 
-            <div class="w-10 h-10 rounded-full nav-glass flex items-center justify-center cursor-pointer hover:bg-white/40 transition">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-slate-700">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                </svg>
-            </div>
-        </div>
+              
+        </div> 
+        
 
         <div class="container mx-auto px-4 flex-1 flex flex-col lg:flex-row items-center justify-between relative z-10 mt-10 lg:mt-0">
             
@@ -784,6 +855,40 @@
 
         </div>
     </footer>
+
+    <script>
+        // 1. Select all nav links and sections
+        const navLinks = document.querySelectorAll('.nav-item');
+        const sections = document.querySelectorAll('section');
+
+        // 2. Listen for scroll events
+        window.addEventListener('scroll', () => {
+            let current = '';
+
+            // 3. Check which section is on screen
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                // If we have scrolled down to this section...
+                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            // 4. Update the Gold Highlight
+            navLinks.forEach(link => {
+                link.classList.remove('active'); // Remove Gold from all
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active'); // Add Gold to current
+                    
+                    // Optional: Auto-scroll the navbar to keep the active button visible
+                    link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
+            });
+        });
+    </script>
+
 
 </body>
 </html>
