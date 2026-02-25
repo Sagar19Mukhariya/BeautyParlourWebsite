@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
     <script>
+
+    
         tailwind.config = {
             theme: {
                 extend: {
@@ -34,6 +36,18 @@
     </script>
 
     <style>
+
+
+        /* --- CHROME FIX START --- */
+    html, body
+    {
+    height: auto !important;
+    width: 100% !important;
+    overflow-y: auto !important;
+    scroll-behavior: smooth !important;
+    }
+    /* --- CHROME FIX END --- */
+
         /* --- GLOBAL & UTILITY --- */
         body {
             /* REPLACED: Removed linear-gradient, added background image */
@@ -857,32 +871,54 @@
     </footer>
 
     <script>
-        // 1. Select all nav links and sections
+        // --- PART 1: CHROME CLICK FIX (Makes the links work) ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault(); // Stop Chrome from getting stuck
+                
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+    
+                if (targetSection) {
+                    // Calculate nav height so we don't land "under" the bar
+                    // We assume the glass nav is about 80px tall
+                    const navHeight = 80; 
+                    const elementPosition = targetSection.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+    
+        // --- PART 2: GOLD HIGHLIGHT & SWIPE (Keeps your Instagram-style nav working) ---
         const navLinks = document.querySelectorAll('.nav-item');
         const sections = document.querySelectorAll('section');
-
-        // 2. Listen for scroll events
+    
         window.addEventListener('scroll', () => {
             let current = '';
-
-            // 3. Check which section is on screen
+    
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
                 
-                // If we have scrolled down to this section...
+                // Check which section is currently on screen
                 if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
                     current = section.getAttribute('id');
                 }
             });
-
-            // 4. Update the Gold Highlight
+    
             navLinks.forEach(link => {
-                link.classList.remove('active'); // Remove Gold from all
+                link.classList.remove('active'); // Turn off Gold
+                
+                // Check if this link matches the current section
                 if (link.getAttribute('href').includes(current)) {
-                    link.classList.add('active'); // Add Gold to current
+                    link.classList.add('active'); // Turn on Gold
                     
-                    // Optional: Auto-scroll the navbar to keep the active button visible
+                    // Auto-scroll the nav bar itself (The Instagram Story Effect)
                     link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
                 }
             });
